@@ -18,14 +18,4 @@ jobs:
           mkdir -p ~/.ssh
           printf '%s' "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
-          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "$VM_USER@$VM_HOST" bash << 'REMOTE
-set -e
-[ ! -d /opt/piskid-lp/.git ] && git clone https://github.com/Wikolabs/piskid-lp.git /opt/piskid-lp
-cd /opt/piskid-lp
-git pull origin main
-docker build -t piskid-lp:local .
-docker stop piskid-lp 2>/dev/null || true
-docker rm piskid-lp 2>/dev/null || true
-docker run -d --name piskid-lp -p 3053:3000 --restart unless-stopped piskid-lp:local
-echo Deployed piskid-lp on port 3053
-REMOTE
+          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "$VM_USER@$VM_HOST" "set -e; [ ! -d /opt/piskid-lp/.git ] && git clone https://github.com/Wikolabs/piskid-lp.git /opt/piskid-lp; cd /opt/piskid-lp && git pull origin main && docker build -t piskid-lp:local . && (docker stop piskid-lp 2>/dev/null; docker rm piskid-lp 2>/dev/null; true) && docker run -d --name piskid-lp -p 3053:3000 --restart unless-stopped piskid-lp:local && echo 'Deployed piskid-lp on port 3053'"
