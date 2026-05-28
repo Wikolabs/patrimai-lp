@@ -52,7 +52,7 @@ export async function POST(req: NextRequest) {
       method: "POST",
       headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
       body: JSON.stringify({
-        model: "llama3-8b-8192",
+        model: "llama-3.1-8b-instant",
         messages: [{ role: "system", content: SYSTEM_PROMPT }, ...messages],
         max_tokens: 600,
         temperature: 0.7,
@@ -63,7 +63,7 @@ export async function POST(req: NextRequest) {
       const errText = await res.text().catch(() => "unknown");
       console.error(`Groq API error ${res.status}:`, errText);
       return NextResponse.json(
-        { content: `[DEBUG Groq ${res.status}] ${errText}` },
+        { content: "Piskid est temporairement indisponible. Réessayez dans quelques instants." },
         { status: 500 }
       );
     }
