@@ -10,7 +10,7 @@ interface Message {
 const INITIAL_MESSAGE: Message = {
   role: "assistant",
   content:
-    "Bonjour ! Je suis Piskid, votre conseiller IA basé sur des données réelles. Contrairement aux faux prophètes, je n'ai rien à vendre. Parlez-moi de vos problèmes de vie, d'amour, de famille, d'argent ou de projet — je vous guiderai vers des vraies solutions disponibles à Madagascar.",
+    "Bonjour ! Je suis Piskid, votre conseiller basé sur des données réelles. Contrairement aux faux prophètes, je n'ai rien à vendre. Parlez-moi de vos problèmes de vie, d'amour, de famille, d'argent ou de projet — je vous guiderai vers de vraies solutions disponibles à Madagascar.",
 };
 
 const QUICK_QUESTIONS = [
@@ -41,10 +41,13 @@ export default function PiskidChat() {
     setIsLoading(true);
 
     try {
+      // Exclude the initial assistant greeting — Groq rejects conversations starting with assistant role
+      const apiMessages = updatedMessages.filter((m) => m !== INITIAL_MESSAGE);
+
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: updatedMessages }),
+        body: JSON.stringify({ messages: apiMessages }),
       });
       const data = await res.json();
       const assistantMessage: Message = {
@@ -78,8 +81,7 @@ export default function PiskidChat() {
         overflow: "hidden",
         display: "flex",
         flexDirection: "column",
-        maxWidth: "42rem",
-        margin: "0 auto",
+        width: "100%",
         boxShadow: "0 8px 40px rgba(109,40,217,0.18)",
       }}
     >
@@ -104,6 +106,7 @@ export default function PiskidChat() {
             alignItems: "center",
             justifyContent: "center",
             fontSize: "1.1rem",
+            flexShrink: 0,
           }}
         >
           🔮
@@ -119,6 +122,7 @@ export default function PiskidChat() {
             height: "0.6rem",
             borderRadius: "50%",
             background: "#22c55e",
+            flexShrink: 0,
           }}
         />
       </div>
@@ -126,13 +130,13 @@ export default function PiskidChat() {
       {/* Messages area */}
       <div
         style={{
-          minHeight: "350px",
-          maxHeight: "420px",
+          minHeight: "520px",
+          maxHeight: "660px",
           overflowY: "auto",
-          padding: "1.25rem",
+          padding: "1.5rem",
           display: "flex",
           flexDirection: "column",
-          gap: "0.875rem",
+          gap: "1rem",
         }}
       >
         {messages.map((msg, i) => (
@@ -145,16 +149,16 @@ export default function PiskidChat() {
           >
             <div
               style={{
-                maxWidth: "80%",
-                padding: "0.75rem 1rem",
+                maxWidth: "78%",
+                padding: "0.85rem 1.1rem",
                 borderRadius:
                   msg.role === "user"
                     ? "1rem 1rem 0.25rem 1rem"
                     : "1rem 1rem 1rem 0.25rem",
                 background: msg.role === "user" ? "#6D28D9" : "#FFFFFF",
                 color: msg.role === "user" ? "#FFFFFF" : "#1a1a2a",
-                fontSize: "0.9rem",
-                lineHeight: "1.55",
+                fontSize: "0.925rem",
+                lineHeight: "1.6",
                 boxShadow:
                   msg.role === "user"
                     ? "0 2px 12px rgba(109,40,217,0.35)"
@@ -170,7 +174,7 @@ export default function PiskidChat() {
           <div style={{ display: "flex", justifyContent: "flex-start" }}>
             <div
               style={{
-                padding: "0.75rem 1rem",
+                padding: "0.85rem 1.1rem",
                 borderRadius: "1rem 1rem 1rem 0.25rem",
                 background: "#FFFFFF",
                 color: "#6D28D9",
@@ -181,7 +185,7 @@ export default function PiskidChat() {
                 gap: "0.4rem",
               }}
             >
-              <span>Piskid réfléchit</span>
+              <span>Piskid analyse votre situation</span>
               <span style={{ letterSpacing: "0.15em" }}>...</span>
             </div>
           </div>
@@ -193,7 +197,7 @@ export default function PiskidChat() {
       {/* Quick questions */}
       <div
         style={{
-          padding: "0 1.25rem 0.75rem",
+          padding: "0 1.5rem 0.875rem",
           display: "flex",
           flexWrap: "wrap",
           gap: "0.5rem",
@@ -205,21 +209,22 @@ export default function PiskidChat() {
             onClick={() => handleSend(q)}
             disabled={isLoading}
             style={{
-              padding: "0.35rem 0.85rem",
+              padding: "0.4rem 1rem",
               borderRadius: "9999px",
-              border: "1px solid #6D28D9",
-              background: "transparent",
+              border: "none",
+              background: "#2D1F6E",
               color: "#A78BFA",
-              fontSize: "0.8rem",
+              fontSize: "0.82rem",
+              fontWeight: 600,
               cursor: isLoading ? "not-allowed" : "pointer",
               opacity: isLoading ? 0.5 : 1,
               transition: "background 0.15s",
             }}
             onMouseEnter={(e) => {
-              if (!isLoading) (e.currentTarget as HTMLButtonElement).style.background = "#2D1F6E";
+              if (!isLoading) (e.currentTarget as HTMLButtonElement).style.background = "#3D2A8E";
             }}
             onMouseLeave={(e) => {
-              (e.currentTarget as HTMLButtonElement).style.background = "transparent";
+              (e.currentTarget as HTMLButtonElement).style.background = "#2D1F6E";
             }}
           >
             {q}
@@ -230,7 +235,7 @@ export default function PiskidChat() {
       {/* Input area */}
       <div
         style={{
-          padding: "0.75rem 1.25rem 1.25rem",
+          padding: "0.75rem 1.5rem 1.5rem",
           display: "flex",
           gap: "0.75rem",
           borderTop: "1px solid #2D1F6E",
@@ -248,7 +253,7 @@ export default function PiskidChat() {
             background: "#1E1340",
             border: "1px solid #2D1F6E",
             borderRadius: "0.75rem",
-            padding: "0.7rem 1rem",
+            padding: "0.8rem 1rem",
             color: "#F3F0FF",
             fontSize: "0.9rem",
             outline: "none",
@@ -261,7 +266,7 @@ export default function PiskidChat() {
             background: "#6D28D9",
             border: "none",
             borderRadius: "0.75rem",
-            padding: "0.7rem 1.1rem",
+            padding: "0.8rem 1.25rem",
             color: "#FFFFFF",
             fontSize: "1rem",
             cursor: isLoading || !input.trim() ? "not-allowed" : "pointer",
