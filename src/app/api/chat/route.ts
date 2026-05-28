@@ -35,23 +35,46 @@ De nombreux Malgaches perdent de l'argent auprès de faux pasteurs, devins indie
 Réponds en 2-4 paragraphes maximum, de façon chaleureuse et pratique. Pose une question de suivi pour mieux comprendre la situation.`;
 
 export async function POST(req: NextRequest) {
-  const { messages } = await req.json();
-  const apiKey = process.env.GROQ_API_KEY;
-  if (!apiKey) return NextResponse.json({ error: "API non configurée" }, { status: 500 });
+  try {
+    const { messages } = await req.json();
+    const apiKey = process.env.GROQ_API_KEY;
 
-  const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-    method: "POST",
-    headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
-    body: JSON.stringify({
-      model: "llama3-8b-8192",
-      messages: [{ role: "system", content: SYSTEM_PROMPT }, ...messages],
-      max_tokens: 600,
-      temperature: 0.7,
-    }),
-  });
+    if (!apiKey) {
+      console.error("GROQ_API_KEY not configured");
+      return NextResponse.json(
+        { content: "Piskid est en cours de configuration. Contactez l'équipe Wikolabs sur WhatsApp." },
+        { status: 500 }
+      );
+    }
 
-  if (!res.ok) return NextResponse.json({ error: "Erreur API" }, { status: 500 });
-  const data = await res.json();
-  const content = data.choices?.[0]?.message?.content ?? "Je n'ai pas pu répondre, réessayez.";
-  return NextResponse.json({ content });
+    const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "llama3-8b-8192",
+        messages: [{ role: "system", content: SYSTEM_PROMPT }, ...messages],
+        max_tokens: 600,
+        temperature: 0.7,
+      }),
+    });
+
+    if (!res.ok) {
+      const errText = await res.text().catch(() => "unknown");
+      console.error(`Groq API error ${res.status}:`, errText);
+      return NextResponse.json(
+        { content: "Piskid est temporairement indisponible. Réessayez dans quelques instants." },
+        { status: 500 }
+      );
+    }
+
+    const data = await res.json();
+    const content = data.choices?.[0]?.message?.content ?? "Je n'ai pas pu répondre, réessayez.";
+    return NextResponse.json({ content });
+  } catch (err) {
+    console.error("Chat route error:", err);
+    return NextResponse.json(
+      { content: "Une erreur s'est produite. Veuillez réessayer." },
+      { status: 500 }
+    );
+  }
 }

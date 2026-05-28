@@ -10,7 +10,7 @@ interface Message {
 const INITIAL_MESSAGE: Message = {
   role: "assistant",
   content:
-    "Bonjour ! Je suis Piskid, votre conseiller basé sur des données réelles. Contrairement aux faux prophètes, je n'ai rien à vendre. Parlez-moi de vos problèmes de vie, d'amour, de famille, d'argent ou de projet — je vous guiderai vers de vraies solutions disponibles à Madagascar.",
+    "Bonjour ! Je suis Piskid, votre conseiller basé sur des données réelles. Contrairement aux faux prophètes, je n'ai rien à vendre. Parlez-moi de vos problèmes de vie, d'amour, de famille, d'argent ou de projet.",
 };
 
 const QUICK_QUESTIONS = [
@@ -25,6 +25,8 @@ export default function PiskidChat() {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
+
+  const showIntro = messages.length === 1;
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -49,16 +51,17 @@ export default function PiskidChat() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ messages: apiMessages }),
       });
+
+      // route.ts always returns JSON with a `content` field now (even on error)
       const data = await res.json();
-      const assistantMessage: Message = {
-        role: "assistant",
-        content: data.content ?? "Je n'ai pas pu répondre, réessayez.",
-      };
-      setMessages((prev) => [...prev, assistantMessage]);
+      setMessages((prev) => [
+        ...prev,
+        { role: "assistant", content: data.content ?? "Je n'ai pas pu répondre, réessayez." },
+      ]);
     } catch {
       setMessages((prev) => [
         ...prev,
-        { role: "assistant", content: "Une erreur s'est produite. Veuillez réessayer." },
+        { role: "assistant", content: "Erreur réseau. Vérifiez votre connexion et réessayez." },
       ]);
     } finally {
       setIsLoading(false);
@@ -127,13 +130,143 @@ export default function PiskidChat() {
         />
       </div>
 
+      {/* Intro panel — visible only before the first user message */}
+      {showIntro && (
+        <div
+          style={{
+            padding: "2rem 2.5rem 1.75rem",
+            borderBottom: "1px solid #2D1F6E",
+            background: "#0F0A1E",
+            textAlign: "center",
+          }}
+        >
+          {/* Red badges */}
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: "0.5rem",
+              justifyContent: "center",
+              marginBottom: "1.25rem",
+            }}
+          >
+            {[
+              { label: "Faux pasteur ❌" },
+              { label: "Devin indien ❌" },
+              { label: "Médium arnaqueur ❌" },
+            ].map((b) => (
+              <span
+                key={b.label}
+                style={{
+                  padding: "0.3rem 0.85rem",
+                  borderRadius: "9999px",
+                  background: "#3B0A0A",
+                  color: "#EF4444",
+                  border: "1px solid #7F1D1D",
+                  fontSize: "0.8rem",
+                  fontWeight: 600,
+                }}
+              >
+                {b.label}
+              </span>
+            ))}
+          </div>
+
+          {/* Title */}
+          <h2
+            style={{
+              fontSize: "clamp(1.35rem, 3vw, 2.1rem)",
+              fontWeight: 900,
+              lineHeight: 1.15,
+              fontFamily: "var(--font-display)",
+              letterSpacing: "-0.025em",
+              marginBottom: "1rem",
+              color: "#F3F0FF",
+            }}
+          >
+            Arrêtez de donner votre argent{" "}
+            <span
+              style={{
+                background: "linear-gradient(90deg, #A78BFA, #F59E0B)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
+            >
+              aux charlatans.
+            </span>
+          </h2>
+
+          {/* Description */}
+          <p
+            style={{
+              fontSize: "0.9rem",
+              color: "#9CA3AF",
+              lineHeight: 1.7,
+              maxWidth: "56rem",
+              margin: "0 auto 0.75rem",
+            }}
+          >
+            Des milliers de Malgaches perdent leurs économies chaque année auprès de faux pasteurs,
+            de devins indiens et d&apos;arnaqueurs qui exploitent la souffrance des gens.
+            Piskid croise une multitude de données réelles : historiques personnels, actualités mondiales
+            et malgaches, analyses comportementales, cycles climatiques, interprétation des rêves,
+            tendances astrologiques et votre historique de situations difficiles pour vous offrir
+            une vision claire de votre situation et vous aider à prendre les bonnes décisions.
+          </p>
+          <p
+            style={{
+              fontSize: "0.85rem",
+              color: "#6D5FA8",
+              lineHeight: 1.65,
+              maxWidth: "48rem",
+              margin: "0 auto 1.25rem",
+            }}
+          >
+            Contrairement aux IA généralistes, Piskid analyse votre historique de vie,
+            vos objectifs personnels, vos schémas comportementaux et vous propose des actions
+            concrètes adaptées à votre réalité malgache.
+          </p>
+
+          {/* Green badges */}
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: "0.5rem",
+              justifyContent: "center",
+            }}
+          >
+            {[
+              { label: "Données réelles ✓" },
+              { label: "Analyse historique ✓" },
+              { label: "Gratuit ✓" },
+            ].map((b) => (
+              <span
+                key={b.label}
+                style={{
+                  padding: "0.3rem 0.85rem",
+                  borderRadius: "9999px",
+                  background: "#052e16",
+                  color: "#22c55e",
+                  border: "1px solid #14532d",
+                  fontSize: "0.8rem",
+                  fontWeight: 600,
+                }}
+              >
+                {b.label}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Messages area */}
       <div
         style={{
-          minHeight: "520px",
-          maxHeight: "660px",
+          minHeight: showIntro ? "160px" : "540px",
+          maxHeight: showIntro ? "200px" : "660px",
           overflowY: "auto",
-          padding: "1.5rem",
+          padding: "1.25rem 1.5rem",
           display: "flex",
           flexDirection: "column",
           gap: "1rem",

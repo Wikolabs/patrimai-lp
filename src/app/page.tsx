@@ -36,127 +36,13 @@ export default function HomePage() {
         </span>
       </nav>
 
-      {/* Hero */}
-      <section style={{
-        maxWidth: "56rem",
-        margin: "0 auto",
-        padding: "5rem 1.5rem 3rem",
-        textAlign: "center",
-      }}>
-        <div style={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "0.6rem",
-          justifyContent: "center",
-          marginBottom: "2rem",
-        }}>
-          {[
-            { label: "Faux pasteur ❌", bg: "#3B0A0A", color: "#EF4444", border: "#7F1D1D" },
-            { label: "Devin indien ❌", bg: "#3B0A0A", color: "#EF4444", border: "#7F1D1D" },
-            { label: "Médium arnaqueur ❌", bg: "#3B0A0A", color: "#EF4444", border: "#7F1D1D" },
-          ].map((b) => (
-            <span key={b.label} style={{
-              padding: "0.35rem 0.9rem",
-              borderRadius: "9999px",
-              background: b.bg,
-              color: b.color,
-              border: `1px solid ${b.border}`,
-              fontSize: "0.82rem",
-              fontWeight: 600,
-            }}>
-              {b.label}
-            </span>
-          ))}
-        </div>
-
-        <h1 style={{
-          fontSize: "clamp(2rem, 5vw, 3.5rem)",
-          fontWeight: 900,
-          lineHeight: 1.1,
-          fontFamily: "var(--font-display)",
-          letterSpacing: "-0.03em",
-          marginBottom: "1.25rem",
-          color: "#F3F0FF",
-        }}>
-          Arrêtez de donner votre argent{" "}
-          <span style={{
-            background: "linear-gradient(90deg, #A78BFA, #F59E0B)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-          }}>
-            aux charlatans.
-          </span>
-        </h1>
-
-        <p style={{
-          fontSize: "clamp(1rem, 2.5vw, 1.15rem)",
-          color: "#9CA3AF",
-          lineHeight: 1.75,
-          maxWidth: "46rem",
-          margin: "0 auto 1.25rem",
-        }}>
-          Des milliers de Malgaches perdent leurs économies chaque année auprès de faux pasteurs,
-          de devins indiens et d&apos;araqueurs qui exploitent la souffrance des gens.
-          Piskid croise une multitude de données réelles : historiques personnels, actualités mondiales
-          et malgaches, analyses comportementales, cycles climatiques, interprétation des rêves,
-          tendances astrologiques et votre historique de situations difficiles pour vous offrir
-          une vision claire de votre situation et vous aider à prendre les bonnes décisions.
-        </p>
-        <p style={{
-          fontSize: "0.95rem",
-          color: "#6D5FA8",
-          lineHeight: 1.65,
-          maxWidth: "40rem",
-          margin: "0 auto 2rem",
-        }}>
-          Contrairement aux IA généralistes, Piskid analyse votre historique de vie,
-          vos objectifs personnels, vos schémas comportementaux et vous propose des actions
-          concrètes adaptées à votre réalité malgache.
-        </p>
-
-        <div style={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "0.6rem",
-          justifyContent: "center",
-        }}>
-          {[
-            { label: "Données réelles ✓", bg: "#052e16", color: "#22c55e", border: "#14532d" },
-            { label: "Analyse historique ✓", bg: "#052e16", color: "#22c55e", border: "#14532d" },
-            { label: "Gratuit ✓", bg: "#052e16", color: "#22c55e", border: "#14532d" },
-          ].map((b) => (
-            <span key={b.label} style={{
-              padding: "0.35rem 0.9rem",
-              borderRadius: "9999px",
-              background: b.bg,
-              color: b.color,
-              border: `1px solid ${b.border}`,
-              fontSize: "0.82rem",
-              fontWeight: 600,
-            }}>
-              {b.label}
-            </span>
-          ))}
-        </div>
-      </section>
-
-      {/* Chatbot section — full width */}
+      {/* Chatbot section — full width, directly below navbar */}
       <section id="chat" style={{
         width: "100%",
         maxWidth: "72rem",
         margin: "0 auto",
-        padding: "0 1.5rem 5rem",
+        padding: "2.5rem 1.5rem 5rem",
       }}>
-        <h2 style={{
-          textAlign: "center",
-          fontSize: "clamp(1.3rem, 3vw, 1.75rem)",
-          fontWeight: 800,
-          fontFamily: "var(--font-display)",
-          color: "#A78BFA",
-          marginBottom: "1.75rem",
-        }}>
-          Parlez à votre mpisikidy IA
-        </h2>
         <PiskidChat />
       </section>
 
@@ -184,7 +70,7 @@ export default function HomePage() {
           {[
             { icon: "💔", title: "Amour et famille", desc: "Difficultés relationnelles, rupture, conflits familiaux, mariage" },
             { icon: "💰", title: "Argent et finances", desc: "Dettes, épargne, mauvaise gestion, investissements à Madagascar" },
-            { icon: "🚀", title: "Projets et carrière", desc: "Projet qui échoue, recherche d&apos;emploi, entrepreneuriat, reconversion" },
+            { icon: "🚀", title: "Projets et carrière", desc: "Projet qui échoue, recherche d'emploi, entrepreneuriat, reconversion" },
             { icon: "🌍", title: "Opportunités à Mada", desc: "Unipod, Maison du Numérique, JCI, Join Scout, BNI Madagascar" },
           ].map((card) => (
             <div key={card.title} style={{
@@ -203,8 +89,9 @@ export default function HomePage() {
               }}>
                 {card.title}
               </h3>
-              <p style={{ fontSize: "0.875rem", color: "#9CA3AF", lineHeight: 1.55 }}
-                dangerouslySetInnerHTML={{ __html: card.desc }} />
+              <p style={{ fontSize: "0.875rem", color: "#9CA3AF", lineHeight: 1.55 }}>
+                {card.desc}
+              </p>
             </div>
           ))}
         </div>
