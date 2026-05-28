@@ -37,7 +37,8 @@ Réponds en 2-4 paragraphes maximum, de façon chaleureuse et pratique. Pose une
 export async function POST(req: NextRequest) {
   try {
     const { messages } = await req.json();
-    const apiKey = process.env.GROQ_API_KEY;
+    // Strip BOM and non-printable characters that can appear when the secret was set from Windows
+    const apiKey = process.env.GROQ_API_KEY?.replace(/[^\x20-\x7E]/g, "").trim() || null;
 
     if (!apiKey) {
       console.error("GROQ_API_KEY not configured");
@@ -71,8 +72,10 @@ export async function POST(req: NextRequest) {
     const content = data.choices?.[0]?.message?.content ?? "Je n'ai pas pu répondre, réessayez.";
     return NextResponse.json({ content });
   } catch (err) {
-    const msg = err instanceof Error ? err.message : String(err);
-    console.error("Chat route error:", msg);
-    return NextResponse.json({ content: `[DEBUG] ${msg}` }, { status: 500 });
+    console.error("Chat route error:", err);
+    return NextResponse.json(
+      { content: "Une erreur s'est produite. Veuillez réessayer." },
+      { status: 500 }
+    );
   }
 }
