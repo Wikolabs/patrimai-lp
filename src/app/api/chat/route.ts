@@ -63,7 +63,7 @@ export async function POST(req: NextRequest) {
       const errText = await res.text().catch(() => "unknown");
       console.error(`Groq API error ${res.status}:`, errText);
       return NextResponse.json(
-        { content: "Piskid est temporairement indisponible. Réessayez dans quelques instants." },
+        { content: `[DEBUG Groq ${res.status}] ${errText}` },
         { status: 500 }
       );
     }
