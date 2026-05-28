@@ -16,6 +16,6 @@ jobs:
           VM_USER: ${{ secrets.WIKOLABS_VM_USER }}
         run: |
           mkdir -p ~/.ssh
-          printf '%s' "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
           ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "$VM_USER@$VM_HOST" "set -e; [ ! -d /opt/piskid/.git ] && git clone https://github.com/Wikolabs/piskid.git /opt/piskid; cd /opt/piskid && git pull origin main && docker build -t piskid:local . && (docker stop piskid 2>/dev/null; docker rm piskid 2>/dev/null; true) && docker run -d --name piskid -p 3053:3000 --restart unless-stopped piskid:local && echo 'Deployed piskid on port 3053'"
