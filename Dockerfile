@@ -3,6 +3,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
+RUN find . -name "*.json" -exec sed -i '1s/^\xEF\xBB\xBF//' {} \; 2>/dev/null; true
 RUN mkdir -p public && npm run build
 
 FROM node:20-alpine AS runner
