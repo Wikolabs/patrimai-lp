@@ -1,3 +1,5 @@
+"use client";
+
 import PiskidChat from "./PiskidChat";
 
 export default function HomePage() {
