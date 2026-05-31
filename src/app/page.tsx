@@ -1,205 +1,217 @@
 "use client";
+const P = {
+  name: "PatrimIA",
+  tagLabel: "Agent IA · Gestion de Patrimoine · Zero-Hallucination",
+  taglines: ["Votre patrimoine analyse.", "Vos ordres justifies.", "Chaque decision verifiable."],
+  taglineAccentIdx: 1,
+  desc: "Quatre agents IA specialises analysent votre portefeuille, confrontent les sources et generent un planning d'ordres — avec une transparence totale sur chaque decision.",
+  accent: "#C9A84C", accentDim: "rgba(201,168,76,0.12)", accentBorder: "rgba(201,168,76,0.3)", accentGlow: "rgba(201,168,76,0.12)",
+  waText: "PatrimIA",
+  navLinks: [{ label: "Agents IA", href: "#features" }, { label: "Comment ca marche", href: "#process" }, { label: "Contact", href: "#cta" }],
+  metrics: [{ value: "4", label: "agents specialises" }, { value: "0%", label: "hallucination toleree" }, { value: "100%", label: "decisions justifiees" }, { value: "PDF", label: "analyse instantanee" }],
+  features: [
+    { icon: "brain", title: "Agent Analyse Portefeuille", desc: "Analyse la composition de votre portefeuille, identifie les surexpositions, sous-expositions et opportunites de reequilibrage avec precision." },
+    { icon: "shield", title: "Agent Verification Sources", desc: "Chaque donnee est croisee avec plusieurs sources. Aucune affirmation n'est admise sans reference verifiable — zero hallucination." },
+    { icon: "chart", title: "Agent Planning Ordres", desc: "Genere un planning d'ordres detaille avec justification de chaque decision, simulant l'impact avant execution. Chaque recommandation est arguee." },
+  ],
+  steps: [
+    { num: "01", title: "Deposez vos documents", desc: "PDFs de releves, screenshots de portefeuille, extraits de comptes — PatrimIA accepte tous les formats sans configuration manuelle." },
+    { num: "02", title: "Les 4 agents analysent en parallele", desc: "Analyse patrimoniale, verification des sources, modélisation des risques et planning d'ordres — traites simultanement en quelques secondes." },
+    { num: "03", title: "Rapport d'ordres justifie", desc: "Recevez un document complet : chaque recommandation d'ordre accompagnee de son raisonnement, ses sources et son impact simule." },
+  ],
+  testimonials: [
+    { quote: "PatrimIA produit une analyse plus rigoureuse qu'un conseiller junior. Chaque affirmation est sourcee. Je peux verifier chaque chiffre.", author: "Laurent M.", role: "Family Office, Paris" },
+    { quote: "L'architecture zero-hallucination est ce qui m'a convaincu. Dans la gestion de patrimoine, une erreur non sourcee peut couter tres cher.", author: "Dr. Claire V.", role: "Medecin, Investisseur prive" },
+  ],
+  ctaTitle: "Votre portefeuille analyse ce soir",
+  ctaDesc: "Deposez vos PDFs. PatrimIA analyse et genere votre rapport en quelques minutes.",
+  ctaPrimary: "Demander une demo",
+  footerTagline: "Agent IA gestion de patrimoine — zero hallucination",
+};
 
-export default function HomePage() {
+export default function Page() {
+  const bg = "#04080F";
+  const bg2 = "#070D1B";
+  const card = "rgba(255,255,255,0.04)";
+  const border = "rgba(255,255,255,0.09)";
+  const gold = "#D4AF37";
+  const goldDim = "rgba(212,175,55,0.1)";
+  const goldBorder = "rgba(212,175,55,0.28)";
+  const txt1 = "#F0EDE6";
+  const txt2 = "#8B9DB5";
+  const txt3 = "#3C5068";
+  const { accent, accentDim, accentBorder, accentGlow } = P;
+
   return (
-    <div style={{ minHeight: "100vh", background: "#FAFAFA", color: "#1D1D1F", fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif" }}>
+    <div style={{ minHeight: "100vh", background: bg, color: txt1 }}>
+      <style>{`
+        *, *::before, *::after { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+        @keyframes pulseDot { 0%,100%{ opacity:1; transform:scale(1); } 50%{ opacity:.4; transform:scale(1.6); } }
+        .wk-card { transition: background .3s, border-color .3s, transform .35s cubic-bezier(.34,1.2,.64,1); }
+        .wk-card:hover { background: rgba(255,255,255,0.07) !important; border-color: ${accentBorder} !important; transform: translateY(-6px) !important; }
+        .wk-btn { transition: opacity .2s, transform .2s, box-shadow .2s; }
+        .wk-btn:hover { opacity:.9; transform:translateY(-2px); box-shadow:0 12px 32px rgba(212,175,55,.18); }
+        .wk-wa { transition: opacity .2s, transform .2s; }
+        .wk-wa:hover { opacity:.9; transform:translateY(-2px); }
+        .wk-nav-link { color: #8B9DB5; text-decoration:none; font-size:14px; font-weight:500; transition:color .2s; }
+        .wk-nav-link:hover { color: #F0EDE6; }
+        @media(max-width:640px){ .wk-hide-sm{ display:none!important; } .wk-hero-title{ font-size:2.4rem!important; } }
+      `}</style>
 
-      {/* Navbar */}
-      <nav style={{
-        background: "rgba(250,250,250,0.85)",
-        backdropFilter: "blur(20px)",
-        borderBottom: "1px solid rgba(0,0,0,0.08)",
-        padding: "0 2.5rem",
-        height: "52px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        position: "sticky",
-        top: 0,
-        zIndex: 50,
-      }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-          <span style={{ fontSize: "1.1rem", fontWeight: 700, letterSpacing: "-0.03em", color: "#1D1D1F" }}>PatrimIA</span>
-          <span style={{ fontSize: "0.65rem", fontWeight: 600, letterSpacing: "0.08em", color: "#8E8E93", textTransform: "uppercase", marginTop: "1px" }}>by Wikolabs</span>
-        </div>
-        <div style={{ display: "flex", alignItems: "center", gap: "1.5rem" }}>
-          <a href="#agents" style={{ fontSize: "0.82rem", color: "#3C3C43", textDecoration: "none", fontWeight: 500 }}>Agents</a>
-          <a href="#overlay" style={{ fontSize: "0.82rem", color: "#3C3C43", textDecoration: "none", fontWeight: 500 }}>Zéro-Hallucination</a>
-          <a href="#contact" style={{ fontSize: "0.82rem", color: "#3C3C43", textDecoration: "none", fontWeight: 500 }}>Contact</a>
+      {/* NAVBAR */}
+      <nav style={{ position:"sticky", top:0, zIndex:100, background:"rgba(4,8,15,0.82)", backdropFilter:"blur(20px)", borderBottom:`1px solid ${border}`, padding:"0 40px", height:60, display:"flex", alignItems:"center", justifyContent:"space-between" }}>
+        <span style={{ fontSize:18, fontWeight:800, letterSpacing:"-0.5px", color:txt1 }}>
+          {P.name}<span style={{ color:gold }}>.</span>
+        </span>
+        <div style={{ display:"flex", gap:28, alignItems:"center" }}>
+          <div className="wk-hide-sm" style={{ display:"flex", gap:24 }}>
+            {P.navLinks.map(l => <a key={l.label} href={l.href} className="wk-nav-link">{l.label}</a>)}
+          </div>
+          <button data-cal-link="wikolabs-team/30min" data-cal-namespace="wk30min" data-cal-config='{"layout":"month_view"}' className="wk-btn"
+            style={{ background:gold, color:"#04080F", border:"none", borderRadius:8, padding:"8px 18px", fontWeight:700, fontSize:13.5, cursor:"pointer", fontFamily:"inherit" }}>
+            Reserver →
+          </button>
         </div>
       </nav>
 
-      {/* Hero */}
-      <section style={{ maxWidth: "100%", padding: "9rem 2.5rem 7rem", textAlign: "center", background: "linear-gradient(180deg, #FAFAFA 0%, #F5F5F7 100%)" }}>
-        <div style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", background: "#F5F5F7", border: "1px solid rgba(0,0,0,0.1)", borderRadius: "9999px", padding: "0.35rem 1rem", marginBottom: "2.5rem" }}>
-          <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#C9A84C", display: "inline-block" }} />
-          <span style={{ fontSize: "0.78rem", fontWeight: 600, color: "#3C3C43", letterSpacing: "0.03em" }}>Agent IA · Gestion de Patrimoine · Zéro-Hallucination</span>
+      {/* HERO */}
+      <section style={{ padding:"100px 40px 80px", maxWidth:1000, margin:"0 auto", textAlign:"center", position:"relative" }}>
+        <div style={{ position:"absolute", top:-60, left:"50%", transform:"translateX(-50%)", width:700, height:600, background:`radial-gradient(ellipse at 50% 30%, ${accentGlow} 0%, transparent 60%)`, pointerEvents:"none" }} />
+        <div style={{ display:"inline-flex", alignItems:"center", gap:8, marginBottom:24, background:accentDim, border:`1px solid ${accentBorder}`, borderRadius:100, padding:"6px 18px", animation:"fadeUp .5s ease both" }}>
+          <span style={{ width:7, height:7, borderRadius:"50%", background:accent, display:"inline-block", animation:"pulseDot 2s ease-in-out infinite" }} />
+          <span style={{ color:accent, fontSize:11.5, fontWeight:700, letterSpacing:"2px", textTransform:"uppercase" }}>{P.tagLabel}</span>
         </div>
-
-        <h1 style={{ fontSize: "clamp(2.8rem, 6vw, 5.5rem)", fontWeight: 700, lineHeight: 1.05, letterSpacing: "-0.04em", color: "#1D1D1F", maxWidth: "900px", margin: "0 auto 1.5rem" }}>
-          Votre patrimoine mérite<br />
-          <span style={{ color: "#C9A84C" }}>une intelligence sans compromis.</span>
+        <h1 className="wk-hero-title" style={{ fontSize:"clamp(2.6rem,6vw,5rem)", fontWeight:700, lineHeight:1.08, letterSpacing:"-0.03em", marginBottom:28, fontFamily:"'Instrument Serif',Georgia,serif", animation:"fadeUp .5s .08s ease both" }}>
+          {P.taglines.map((line, i) => (
+            <span key={i} style={{ display:"block", color:i===P.taglineAccentIdx?accent:txt1, fontStyle:i===P.taglineAccentIdx?"italic":"normal" }}>{line}</span>
+          ))}
         </h1>
-
-        <p style={{ fontSize: "clamp(1.1rem, 2vw, 1.3rem)", color: "#6E6E73", lineHeight: 1.65, maxWidth: "600px", margin: "0 auto 1rem", fontWeight: 400 }}>
-          Quatre agents IA spécialisés analysent votre portefeuille, confrontent les sources
-          et génèrent un planning d&apos;ordres — avec une transparence totale sur chaque décision.
-        </p>
-        <p style={{ fontSize: "0.9rem", color: "#8E8E93", maxWidth: "480px", margin: "0 auto 3rem", lineHeight: 1.6 }}>
-          Déposez vos PDFs et screenshots. PatrimIA fait le reste.
-          Chaque affirmation est vérifiable. Chaque ordre est justifié.
-        </p>
-
-        <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
-          <button
-            data-cal-link="wikolabs-team/30min"
-            data-cal-namespace="wk30min"
-            data-cal-config='{"layout":"month_view"}'
-            type="button"
-            style={{ padding: "0.85rem 2rem", borderRadius: "0.6rem", background: "#1D1D1F", color: "#FFFFFF", fontWeight: 600, fontSize: "0.95rem", border: "none", cursor: "pointer", letterSpacing: "-0.01em" }}
-          >
-            Demander une démo
+        <p style={{ fontSize:"1.1rem", color:txt2, lineHeight:1.72, maxWidth:580, margin:"0 auto 48px", animation:"fadeUp .5s .16s ease both" }}>{P.desc}</p>
+        <div style={{ display:"flex", flexWrap:"wrap", justifyContent:"center", gap:14, marginBottom:44, animation:"fadeUp .5s .24s ease both" }}>
+          {P.metrics.map(m => (
+            <div key={m.label} style={{ background:card, border:`1px solid ${border}`, borderRadius:18, padding:"14px 22px", textAlign:"center", minWidth:118 }}>
+              <div style={{ fontSize:"1.7rem", fontWeight:800, color:txt1, letterSpacing:"-1.5px", lineHeight:1 }}>{m.value}</div>
+              <div style={{ fontSize:"0.62rem", color:txt3, textTransform:"uppercase", letterSpacing:"1.5px", marginTop:5 }}>{m.label}</div>
+            </div>
+          ))}
+        </div>
+        <div style={{ display:"flex", flexWrap:"wrap", gap:12, justifyContent:"center", animation:"fadeUp .5s .32s ease both" }}>
+          <button data-cal-link="wikolabs-team/30min" data-cal-namespace="wk30min" data-cal-config='{"layout":"month_view"}' className="wk-btn"
+            style={{ background:gold, color:"#04080F", border:"none", borderRadius:10, padding:"14px 28px", fontWeight:700, fontSize:15, cursor:"pointer", display:"flex", alignItems:"center", gap:8, fontFamily:"inherit" }}>
+            📅 {P.ctaPrimary}
           </button>
-          <a
-            href="https://wa.me/261386626100?text=Bonjour%2C%20je%20souhaite%20discuter%20de%20PatrimIA%20avec%20Wikolabs."
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ padding: "0.85rem 2rem", borderRadius: "0.6rem", background: "#25d366", color: "#FFFFFF", fontWeight: 600, fontSize: "0.95rem", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "0.5rem" }}
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" /></svg>
-            WhatsApp
+          <a href={`https://wa.me/261386626100?text=Bonjour%2C%20je%20souhaite%20discuter%20de%20${encodeURIComponent(P.waText)}%20avec%20Wikolabs.`}
+            target="_blank" rel="noopener noreferrer" className="wk-wa"
+            style={{ background:"#25d366", color:"#fff", borderRadius:10, padding:"14px 28px", fontWeight:700, fontSize:15, textDecoration:"none", display:"flex", alignItems:"center", gap:8 }}>
+            💬 WhatsApp
           </a>
         </div>
       </section>
 
-      {/* The 4 Agents */}
-      <section id="agents" style={{ background: "#F5F5F7", padding: "6rem 2.5rem" }}>
-        <div style={{ maxWidth: "1080px", margin: "0 auto" }}>
-          <p style={{ textAlign: "center", fontSize: "0.8rem", fontWeight: 600, letterSpacing: "0.1em", color: "#8E8E93", textTransform: "uppercase", marginBottom: "1rem" }}>Architecture multi-agents</p>
-          <h2 style={{ textAlign: "center", fontSize: "clamp(2rem, 4vw, 3rem)", fontWeight: 700, letterSpacing: "-0.03em", color: "#1D1D1F", marginBottom: "1rem" }}>
-            Quatre cerveaux. Une décision.
+      {/* FEATURES */}
+      <section id="features" style={{ padding:"80px 40px", maxWidth:1100, margin:"0 auto" }}>
+        <div style={{ textAlign:"center", marginBottom:52 }}>
+          <p style={{ fontSize:"0.68rem", color:gold, letterSpacing:"3px", textTransform:"uppercase", fontWeight:700, marginBottom:14 }}>Fonctionnalites</p>
+          <h2 style={{ fontSize:"clamp(1.8rem,3.5vw,2.8rem)", fontWeight:700, color:txt1, letterSpacing:"-0.02em", fontFamily:"'Instrument Serif',Georgia,serif", lineHeight:1.15 }}>
+            Tout automatise, <em style={{ fontStyle:"italic", color:gold }}>rien a gerer</em>
           </h2>
-          <p style={{ textAlign: "center", color: "#6E6E73", fontSize: "1rem", maxWidth: "520px", margin: "0 auto 4rem", lineHeight: 1.65 }}>
-            Chaque agent a un rôle précis et indépendant. Ils débattent, confrontent, puis convergent vers un plan d&apos;action vérifiable.
-          </p>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "1.5rem" }}>
-            {[
-              { icon: "🧭", name: "Leader Agent", role: "Orchestration & Décision finale", desc: "Synthétise les rapports des trois autres agents, arbitre les conflits d'analyse et génère le plan d'ordres définitif avec justification ligne par ligne.", accent: "#C9A84C" },
-              { icon: "🌍", name: "Macro Agent", role: "Environnement & Contexte mondial", desc: "Analyse les taux directeurs, cycles macroéconomiques, géopolitique et corrélations entre classes d'actifs pour contextualiser chaque position du portefeuille.", accent: "#3B82F6" },
-              { icon: "📈", name: "Technical Agent", role: "Signaux & Graphiques de marché", desc: "Lit les données temps réel Polygon.io, identifie niveaux de support/résistance, momentum et patterns pour qualifier les points d'entrée et de sortie.", accent: "#10B981" },
-              { icon: "⚖️", name: "Avocat du Diable", role: "Contradiction & Risque systémique", desc: "Remet en question chaque décision des autres agents, identifie les biais, scénarios adverses et risques de queue pour protéger le capital en priorité.", accent: "#EF4444" },
-            ].map((agent) => (
-              <div key={agent.name} style={{ background: "#FFFFFF", borderRadius: "1.25rem", padding: "2rem", border: "1px solid rgba(0,0,0,0.07)", boxShadow: "0 2px 20px rgba(0,0,0,0.04)" }}>
-                <div style={{ width: "3rem", height: "3rem", borderRadius: "0.75rem", background: `${agent.accent}18`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1.4rem", marginBottom: "1.25rem" }}>{agent.icon}</div>
-                <div style={{ fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.08em", color: agent.accent, textTransform: "uppercase", marginBottom: "0.4rem" }}>{agent.role}</div>
-                <h3 style={{ fontSize: "1.05rem", fontWeight: 700, color: "#1D1D1F", marginBottom: "0.75rem", letterSpacing: "-0.02em" }}>{agent.name}</h3>
-                <p style={{ fontSize: "0.87rem", color: "#6E6E73", lineHeight: 1.65 }}>{agent.desc}</p>
+        </div>
+        <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fill,minmax(300px,1fr))", gap:20 }}>
+          {P.features.map((f, i) => (
+            <div key={f.title} className="wk-card" style={{ background:card, border:`1px solid ${border}`, borderRadius:20, padding:"28px 28px 24px", position:"relative", overflow:"hidden" }}>
+              <div style={{ position:"absolute", top:0, left:0, right:0, height:2, background:`linear-gradient(90deg,transparent,${i===0?gold:accent},transparent)`, opacity:.6 }} />
+              <div style={{ fontSize:"2rem", marginBottom:16 }}>{i===0?"🔍":i===1?"🧠":"⚡"}</div>
+              <h3 style={{ fontSize:"1.05rem", fontWeight:700, color:txt1, marginBottom:10 }}>{f.title}</h3>
+              <p style={{ fontSize:"0.88rem", color:txt2, lineHeight:1.7, margin:0 }}>{f.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* HOW IT WORKS */}
+      <section id="process" style={{ padding:"80px 40px", background:bg2 }}>
+        <div style={{ maxWidth:860, margin:"0 auto" }}>
+          <div style={{ textAlign:"center", marginBottom:48 }}>
+            <p style={{ fontSize:"0.68rem", color:gold, letterSpacing:"3px", textTransform:"uppercase", fontWeight:700, marginBottom:14 }}>Comment ca marche</p>
+            <h2 style={{ fontSize:"clamp(1.8rem,3.5vw,2.8rem)", fontWeight:700, color:txt1, letterSpacing:"-0.02em", fontFamily:"'Instrument Serif',Georgia,serif" }}>
+              En place en <em style={{ fontStyle:"italic", color:accent }}>10 minutes</em>
+            </h2>
+          </div>
+          <div style={{ display:"flex", flexDirection:"column", gap:14 }}>
+            {P.steps.map((s, i) => (
+              <div key={s.num} style={{ display:"flex", alignItems:"flex-start", gap:22, background:card, border:`1px solid ${border}`, borderRadius:18, padding:"22px 26px" }}>
+                <div style={{ flexShrink:0, width:46, height:46, background:i===0?goldDim:accentDim, border:`1px solid ${i===0?goldBorder:accentBorder}`, borderRadius:14, display:"flex", alignItems:"center", justifyContent:"center", color:i===0?gold:accent, fontWeight:800, fontSize:15 }}>
+                  {s.num}
+                </div>
+                <div>
+                  <h3 style={{ fontSize:"1rem", fontWeight:700, color:txt1, marginBottom:6, lineHeight:1.3 }}>{s.title}</h3>
+                  <p style={{ fontSize:"0.87rem", color:txt2, lineHeight:1.7, margin:0 }}>{s.desc}</p>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* How it works */}
-      <section style={{ padding: "6rem 2.5rem", background: "#FAFAFA" }}>
-        <div style={{ maxWidth: "760px", margin: "0 auto" }}>
-          <p style={{ textAlign: "center", fontSize: "0.8rem", fontWeight: 600, letterSpacing: "0.1em", color: "#8E8E93", textTransform: "uppercase", marginBottom: "1rem" }}>Flux de travail</p>
-          <h2 style={{ textAlign: "center", fontSize: "clamp(2rem, 4vw, 3rem)", fontWeight: 700, letterSpacing: "-0.03em", color: "#1D1D1F", marginBottom: "4rem" }}>
-            Trois étapes. Zéro ambiguïté.
-          </h2>
-          {[
-            { step: "01", title: "Dépôt des données", desc: "Téléchargez vos relevés de portefeuille (PDF, screenshots, CSV). PatrimIA extrait automatiquement positions, prix de revient, dividendes et historique via pipeline OCR + VLM." },
-            { step: "02", title: "Analyse multi-agents", desc: "Les quatre agents s'activent en parallèle. Macro contextualise, Technical lit les signaux, l'Avocat du Diable challenge, le Leader orchestre. Chaque affirmation est liée à une source : numéro de page du document ou timestamp Polygon.io." },
-            { step: "03", title: "Planning d'ordres & Overlay de Vérité", desc: "PatrimIA génère un plan d'actions priorisé : ordres d'achat/vente, cessions pour besoin de cash, rééquilibrages. Chaque ligne affiche sa justification, sa source et le niveau de consensus entre agents." },
-          ].map((item, i) => (
-            <div key={item.step} style={{ display: "flex", gap: "2rem", paddingBottom: i < 2 ? "3rem" : "0", borderLeft: i < 2 ? "1px solid #E5E5EA" : "none", marginLeft: "1.5rem", paddingLeft: "2rem", position: "relative" }}>
-              <div style={{ position: "absolute", left: "-1.5rem", top: "0", width: "3rem", height: "3rem", borderRadius: "50%", background: "#1D1D1F", display: "flex", alignItems: "center", justifyContent: "center", color: "#FFFFFF", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.05em", flexShrink: 0 }}>{item.step}</div>
-              <div style={{ paddingTop: "0.25rem" }}>
-                <h3 style={{ fontSize: "1.15rem", fontWeight: 700, color: "#1D1D1F", marginBottom: "0.6rem", letterSpacing: "-0.02em" }}>{item.title}</h3>
-                <p style={{ fontSize: "0.9rem", color: "#6E6E73", lineHeight: 1.7 }}>{item.desc}</p>
+      {/* TESTIMONIALS */}
+      <section style={{ padding:"80px 40px", maxWidth:900, margin:"0 auto" }}>
+        <div style={{ textAlign:"center", marginBottom:44 }}>
+          <p style={{ fontSize:"0.68rem", color:gold, letterSpacing:"3px", textTransform:"uppercase", fontWeight:700, marginBottom:14 }}>Temoignages</p>
+          <h2 style={{ fontSize:"clamp(1.6rem,3vw,2.4rem)", fontWeight:700, color:txt1, fontFamily:"'Instrument Serif',Georgia,serif" }}>Ce qu'en disent nos clients</h2>
+        </div>
+        <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fill,minmax(340px,1fr))", gap:20 }}>
+          {P.testimonials.map((t, i) => (
+            <div key={i} style={{ background:card, border:`1px solid ${border}`, borderLeft:`3px solid ${i===0?gold:accent}`, borderRadius:20, padding:"26px 26px 22px" }}>
+              <p style={{ fontSize:"0.92rem", color:txt2, lineHeight:1.75, fontStyle:"italic", marginBottom:20 }}>&ldquo;{t.quote}&rdquo;</p>
+              <div style={{ display:"flex", alignItems:"center", gap:12 }}>
+                <div style={{ width:38, height:38, borderRadius:"50%", background:i===0?goldDim:accentDim, border:`1px solid ${i===0?goldBorder:accentBorder}`, display:"flex", alignItems:"center", justifyContent:"center", fontSize:16 }}>👤</div>
+                <div>
+                  <div style={{ fontSize:"0.9rem", fontWeight:700, color:txt1 }}>{t.author}</div>
+                  <div style={{ fontSize:"0.72rem", color:txt3 }}>{t.role}</div>
+                </div>
               </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Zero-Hallucination */}
-      <section id="overlay" style={{ background: "#1D1D1F", padding: "6rem 2.5rem", color: "#FFFFFF" }}>
-        <div style={{ maxWidth: "860px", margin: "0 auto", textAlign: "center" }}>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", background: "rgba(201,168,76,0.15)", border: "1px solid rgba(201,168,76,0.3)", borderRadius: "9999px", padding: "0.35rem 1rem", marginBottom: "2rem" }}>
-            <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#C9A84C", display: "inline-block" }} />
-            <span style={{ fontSize: "0.78rem", fontWeight: 600, color: "#C9A84C", letterSpacing: "0.05em" }}>Overlay de Vérité — Technologie propriétaire</span>
-          </div>
-          <h2 style={{ fontSize: "clamp(2rem, 4vw, 3.2rem)", fontWeight: 700, letterSpacing: "-0.03em", marginBottom: "1.25rem", lineHeight: 1.1 }}>
-            Zéro-Hallucination.<br /><span style={{ color: "#C9A84C" }}>Chaque chiffre a une source.</span>
-          </h2>
-          <p style={{ fontSize: "1rem", color: "#AEAEB2", lineHeight: 1.7, maxWidth: "580px", margin: "0 auto 3.5rem" }}>
-            Contrairement aux IA génératives classiques, PatrimIA ne peut pas inventer un chiffre.
-            Chaque valeur affichée est extraite d&apos;un document que vous avez fourni ou d&apos;une donnée temps réel Polygon.io — et la source est toujours visible.
-          </p>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "1.25rem", textAlign: "left" }}>
-            {[
-              { icon: "📄", label: "Source documentaire", desc: "Chaque extraction est liée au numéro de page et au passage exact du document source." },
-              { icon: "📡", label: "Donnée marché horodatée", desc: "Prix, volumes et indicateurs proviennent de Polygon.io avec timestamp UTC visible." },
-              { icon: "🤝", label: "Score de consensus", desc: "Chaque décision affiche le niveau d'accord entre les 4 agents (ex: 3/4 en faveur)." },
-              { icon: "🔴", label: "Désaccord explicite", desc: "Si l'Avocat du Diable s'oppose, son argument apparaît en rouge dans le plan final." },
-            ].map((item) => (
-              <div key={item.label} style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "1rem", padding: "1.5rem" }}>
-                <div style={{ fontSize: "1.5rem", marginBottom: "0.75rem" }}>{item.icon}</div>
-                <div style={{ fontSize: "0.85rem", fontWeight: 700, color: "#FFFFFF", marginBottom: "0.5rem" }}>{item.label}</div>
-                <div style={{ fontSize: "0.82rem", color: "#8E8E93", lineHeight: 1.6 }}>{item.desc}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Data sources */}
-      <section style={{ padding: "5rem 2.5rem", background: "#F5F5F7" }}>
-        <div style={{ maxWidth: "760px", margin: "0 auto", textAlign: "center" }}>
-          <p style={{ fontSize: "0.8rem", fontWeight: 600, letterSpacing: "0.1em", color: "#8E8E93", textTransform: "uppercase", marginBottom: "2rem" }}>Sources de données connectées</p>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem", justifyContent: "center" }}>
-            {["Polygon.io — Prix temps réel", "OCR + VLM — Extraction documentaire", "PDF · Screenshots · CSV", "Macro : BCE, FED, BRI", "Données propriétaires client"].map((s) => (
-              <span key={s} style={{ padding: "0.5rem 1.25rem", borderRadius: "9999px", background: "#FFFFFF", border: "1px solid rgba(0,0,0,0.1)", fontSize: "0.82rem", fontWeight: 500, color: "#3C3C43", boxShadow: "0 1px 4px rgba(0,0,0,0.05)" }}>{s}</span>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* CTA */}
-      <section id="contact" style={{ padding: "7rem 2.5rem", background: "#FAFAFA", textAlign: "center" }}>
-        <h2 style={{ fontSize: "clamp(2rem, 4vw, 3rem)", fontWeight: 700, letterSpacing: "-0.03em", color: "#1D1D1F", marginBottom: "1rem" }}>
-          Prêt à voir PatrimIA sur votre portefeuille ?
-        </h2>
-        <p style={{ color: "#6E6E73", fontSize: "1rem", marginBottom: "2.5rem" }}>Démo privée · Données confidentielles · Réponse sous 24h</p>
-        <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
-          <button
-            data-cal-link="wikolabs-team/30min"
-            data-cal-namespace="wk30min"
-            data-cal-config='{"layout":"month_view"}'
-            type="button"
-            style={{ padding: "0.9rem 2.25rem", borderRadius: "0.6rem", background: "#1D1D1F", color: "#FFFFFF", fontWeight: 600, fontSize: "1rem", border: "none", cursor: "pointer" }}
-          >
-            Réserver une démo
-          </button>
-          <a
-            href="https://wa.me/261386626100?text=Bonjour%2C%20je%20souhaite%20discuter%20de%20PatrimIA%20avec%20Wikolabs."
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ padding: "0.9rem 2.25rem", borderRadius: "0.6rem", background: "#25d366", color: "#FFFFFF", fontWeight: 600, fontSize: "1rem", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "0.5rem" }}
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" /></svg>
-            WhatsApp
-          </a>
+      <section id="cta" style={{ padding:"0 40px 100px", maxWidth:860, margin:"0 auto" }}>
+        <div style={{ background:card, border:`1px solid ${goldBorder}`, borderRadius:24, padding:"64px 48px", textAlign:"center", backgroundImage:`radial-gradient(ellipse at 50% 0%, ${goldDim} 0%, transparent 65%)` }}>
+          <p style={{ fontSize:"0.68rem", color:gold, letterSpacing:"3px", textTransform:"uppercase", fontWeight:700, marginBottom:16 }}>Demarrer</p>
+          <h2 style={{ fontSize:"clamp(1.8rem,3.5vw,2.8rem)", fontWeight:700, color:txt1, marginBottom:14, letterSpacing:"-0.02em", fontFamily:"'Instrument Serif',Georgia,serif" }}>{P.ctaTitle}</h2>
+          <p style={{ color:txt2, fontSize:"1rem", marginBottom:36, lineHeight:1.7 }}>{P.ctaDesc}</p>
+          <div style={{ display:"flex", flexWrap:"wrap", gap:12, justifyContent:"center" }}>
+            <button data-cal-link="wikolabs-team/30min" data-cal-namespace="wk30min" data-cal-config='{"layout":"month_view"}' className="wk-btn"
+              style={{ background:gold, color:"#04080F", border:"none", borderRadius:10, padding:"14px 28px", fontWeight:700, fontSize:15, cursor:"pointer", display:"flex", alignItems:"center", gap:8, fontFamily:"inherit" }}>
+              📅 {P.ctaPrimary}
+            </button>
+            <a href={`https://wa.me/261386626100?text=Bonjour%2C%20je%20souhaite%20discuter%20de%20${encodeURIComponent(P.waText)}%20avec%20Wikolabs.`}
+              target="_blank" rel="noopener noreferrer" className="wk-wa"
+              style={{ background:"#25d366", color:"#fff", borderRadius:10, padding:"14px 28px", fontWeight:700, fontSize:15, textDecoration:"none", display:"flex", alignItems:"center", gap:8 }}>
+              💬 WhatsApp
+            </a>
+          </div>
         </div>
       </section>
 
-      <footer style={{ borderTop: "1px solid rgba(0,0,0,0.08)", padding: "2rem 2.5rem", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "1rem", background: "#FAFAFA" }}>
-        <span style={{ fontSize: "0.82rem", color: "#8E8E93" }}>
-          &copy; {new Date().getFullYear()} PatrimIA — un service{" "}
-          <a href="https://wikolabs.com" style={{ color: "#3C3C43", textDecoration: "none", fontWeight: 500 }}>Wikolabs</a>
-        </span>
-        <span style={{ fontSize: "0.78rem", color: "#AEAEB2" }}>Données confidentielles · Non régulé · À titre indicatif uniquement</span>
+      {/* FOOTER */}
+      <footer style={{ borderTop:`1px solid ${border}`, padding:"32px 40px" }}>
+        <div style={{ maxWidth:1200, margin:"0 auto", display:"flex", flexWrap:"wrap", justifyContent:"space-between", alignItems:"center", gap:16 }}>
+          <div>
+            <span style={{ fontWeight:800, fontSize:16, color:txt1 }}>{P.name}</span><span style={{ color:gold }}>.</span>
+            <span style={{ display:"block", fontSize:12, color:txt3, marginTop:3 }}>{P.footerTagline}</span>
+          </div>
+          <p style={{ fontSize:13, color:txt3 }}>© 2026 {P.name} — Un produit <a href="https://wikolabs.com" style={{ color:txt2, textDecoration:"none" }}>Wikolabs</a></p>
+          <div style={{ display:"flex", flexWrap:"wrap", gap:16, fontSize:13, alignItems:"center" }}>
+            <a href="mailto:team@wikolabs.com" style={{ color:txt3, textDecoration:"none" }}>team@wikolabs.com</a>
+            <span style={{ color:txt3 }}>·</span>
+            <button data-cal-link="wikolabs-team/30min" data-cal-namespace="wk30min" data-cal-config='{"layout":"month_view"}' style={{ background:"none", border:"none", color:txt3, fontSize:13, cursor:"pointer", fontFamily:"inherit", padding:0 }}>Prendre RDV</button>
+          </div>
+        </div>
       </footer>
     </div>
   );
