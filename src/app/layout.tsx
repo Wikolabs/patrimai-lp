@@ -3,7 +3,7 @@ import { Plus_Jakarta_Sans } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-body", display: "swap", weight: ["400","500","600","700","800"] });
-export const metadata: Metadata = { title: "PatrimIA â€” Agent IA gestion de patrimoine, zero hallucination", description: "Quatre agents IA analysent votre portefeuille, confrontent les sources et generent un planning d'ordres justifie. Transparence totale sur chaque decision." };
+export const metadata: Metadata = { title: "PatrimIA — Agent IA gestion de patrimoine, zero hallucination", description: "Quatre agents IA analysent votre portefeuille, confrontent les sources et generent un planning d'ordres justifie. Transparence totale sur chaque decision." };
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="fr" className={jakarta.variable}>
