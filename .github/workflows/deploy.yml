@@ -25,4 +25,4 @@ jobs:
             -o ServerAliveInterval=30 \
             -o ServerAliveCountMax=30 \
             "$VM_USER@$VM_HOST" \
-            "set -e; if [ -d /opt/patrimai/.git ]; then cd /opt/patrimai && git remote set-url origin https://github.com/Wikolabs/patrimai-lp.git && git fetch origin main && git reset --hard origin/main; else git clone https://github.com/Wikolabs/patrimai-lp.git /opt/patrimai && cd /opt/patrimai; fi && docker build -t patrimai:local . && (docker stop patrimai 2>/dev/null; docker rm patrimai 2>/dev/null; true) && docker run -d --name patrimai -p 3058:3000 --restart unless-stopped patrimai:local && echo 'Deployed patrimai on port 3058'"
+            "set -e; if [ -d /opt/patrimai/.git ]; then cd /opt/patrimai && git remote set-url origin https://github.com/Wikolabs/patrimai-lp.git && git fetch origin main && git reset --hard origin/main; else git clone https://github.com/Wikolabs/patrimai-lp.git /opt/patrimai && cd /opt/patrimai; fi && docker build -t patrimai:local . && docker rm -f patrimai 2>/dev/null || true && docker run -d --name patrimai -p 3058:3000 --restart unless-stopped patrimai:local && echo 'Deployed patrimai on port 3058'"
