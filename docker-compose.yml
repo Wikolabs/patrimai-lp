@@ -4,7 +4,8 @@ version: "3.9"
 # 2 services orchestrated:
 #   - patrimai-lp (Next.js frontend on host port 3058)
 #   - patrimai-lp-backend (FastAPI Python, internal only on 8000)
-# Internal network so the frontend can reach the backend by service name.
+# Shared external network wkdemo-net (created once by deploy.yml) avoids
+# Docker default address-pool exhaustion across all 47 LP stacks.
 
 services:
   patrimai-lp-backend:
@@ -15,10 +16,22 @@ services:
       GROQ_API_KEY: ${GROQ_API_KEY:-}
       GEMINI_API_KEY: ${GEMINI_API_KEY:-}
     networks:
+      - wkdemo_net
+
+  patrimai-lp:
+    image: ghcr.io/wikolabs/patrimai-lp:latest
+    container_name: patrimai-lp
+    restart: unless-stopped
+    ports:
+      - "3058:3000"
+    environment:
+      BACKEND_URL: "http://patrimai-lp-backend:8000"
+    depends_on:
+      - patrimai-lp-backend
+    networks:
+      - wkdemo_net
+
+networks:
   wkdemo_net:
     name: wkdemo-net
     external: true
-networks:
-  patrimai-lp-net:
-    name: patrimai-lp-net
-    driver: bridge
