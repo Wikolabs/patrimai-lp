@@ -15,21 +15,9 @@ services:
       GROQ_API_KEY: ${GROQ_API_KEY:-}
       GEMINI_API_KEY: ${GEMINI_API_KEY:-}
     networks:
-      - patrimai-lp-net
-
-  patrimai-lp:
-    image: ghcr.io/wikolabs/patrimai-lp:latest
-    container_name: patrimai-lp
-    restart: unless-stopped
-    ports:
-      - "3058:3000"
-    environment:
-      BACKEND_URL: "http://patrimai-lp-backend:8000"
-    depends_on:
-      - patrimai-lp-backend
-    networks:
-      - patrimai-lp-net
-
+  wkdemo_net:
+    name: wkdemo-net
+    external: true
 networks:
   patrimai-lp-net:
     name: patrimai-lp-net
