@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useState } from "react";
 
 const PRODUCT = "PatrimIA";
@@ -72,7 +72,7 @@ export default function DemoPage() {
     }
     setLoading(true);
     try {
-      const r = await fetch("/api/demo", {
+      const r = await fetch("/offers/patrimai/demo/api/demo", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ portfolio, lang }),
