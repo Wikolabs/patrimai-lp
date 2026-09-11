@@ -1,22 +1,22 @@
-﻿"use client";
+"use client";
 import { useState } from "react";
 
 const PRODUCT = "PatrimIA";
 
 const PAL = {
-  bg: "#0D0F14",
-  bg2: "#15181F",
-  surface: "rgba(255,255,255,0.04)",
-  surfaceHover: "rgba(255,255,255,0.07)",
-  border: "rgba(255,255,255,0.09)",
-  txt1: "#F5EFE0",
-  txt2: "#B8AC8C",
-  txt3: "#807660",
-  accent: "#C9A84C",
-  accentSoft: "rgba(201,168,76,0.12)",
-  accentBorder: "rgba(201,168,76,0.30)",
-  accentGlow: "rgba(201,168,76,0.18)",
-  navBg: "rgba(13,15,20,0.82)",
+  bg: "#1A1420",
+  bg2: "#221A29",
+  surface: "rgba(255,255,255,0.06)",
+  surfaceHover: "rgba(255,255,255,0.09)",
+  border: "rgba(255,255,255,0.12)",
+  txt1: "#F2ECF1",
+  txt2: "#C7BDC8",
+  txt3: "#8F8393",
+  accent: "#F2C230",
+  accentSoft: "rgba(242,194,48,0.14)",
+  accentBorder: "rgba(242,194,48,0.40)",
+  accentGlow: "rgba(242,194,48,0.18)",
+  navBg: "rgba(26,20,32,0.88)",
 };
 
 const SAMPLE_FR = "Actions Tech (AAPL, MSFT, NVDA), 320 000 EUR\nETF World S&P 500, 180 000 EUR\nObligations Etat France, 90 000 EUR\nLivret A + LDDS, 45 000 EUR\nSCPI Pierval Sante, 60 000 EUR\nCrypto BTC + ETH, 35 000 EUR";
@@ -33,20 +33,20 @@ export default function DemoPage() {
   const [staticMode, setStaticMode] = useState(false);
 
   const t = lang === "fr" ? {
-    back: "Retour", title: "Demo", sub: PRODUCT + " - agent patrimonial zero-hallucination",
-    desc: "Collez la composition de votre portefeuille (lignes : actions, obligations, immobilier, livrets, crypto). L'agent IA produit une analyse risque/rendement avec sources citees pour CHAQUE affirmation. Aucune execution reelle - POC qui montre la rigueur de production.",
+    back: "Retour", title: "Démo", sub: PRODUCT + " - agent patrimonial zero-hallucination",
+    desc: "Collez la composition de votre portefeuille (lignes : actions, obligations, immobilier, livrets, crypto). L'agent IA produit une analyse risque/rendement avec sources citees pour CHAQUE affirmation. Aucune execution réelle - POC qui montre la rigueur de production.",
     inputLabel: "Composition portefeuille",
     placeholderP: "Une ligne par poste (ex: Actions tech, 120 000 EUR)",
     sample: "Utiliser un exemple",
     generate: "Analyser le portefeuille", generating: "Analyse en cours...",
-    outputTitle: "Analyse PatrimIA", emptyHint: "L'analyse s'affiche ici une fois generee.",
-    contactCGP: "Briefer mon CGP", exportPDF: "Exporter en PDF", verifySources: "Verifier les sources",
-    cgpMock: "Brief envoye a votre CGP (mode demo, pas de connexion CRM reelle)",
-    pdfMock: "PDF reglementaire genere (mode demo, pas de telechargement reel)",
-    sourcesMock: "Sources verifiees - lien vers AMF, BCE, Morningstar (mode demo)",
-    fallback: "Mode statique : la cle LLM sera ajoutee au prochain deploiement.",
-    poweredBy: "Modele :",
-    note: "DEMO POC - aucune execution d'ordre, aucune connexion CRM/banque. ZERO-HALLUCINATION : chaque chiffre est sourcee. Sources demo inventees mais coherentes, en production = sources reelles (BCE, AMF, Bloomberg).",
+    outputTitle: "Analyse PatrimIA", emptyHint: "L'analyse s'affiche ici une fois générée.",
+    contactCGP: "Briefer mon CGP", exportPDF: "Exporter en PDF", verifySources: "Vérifier les sources",
+    cgpMock: "Brief envoyé à votre CGP (mode démo, pas de connexion CRM réelle)",
+    pdfMock: "PDF réglementaire généré (mode démo, pas de telechargement réel)",
+    sourcesMock: "Sources verifiees - lien vers AMF, BCE, Morningstar (mode démo)",
+    fallback: "Mode statique : la clé LLM sera ajoutée au prochain déploiement.",
+    poweredBy: "Modèle :",
+    note: "DEMO POC - aucune execution d'ordre, aucune connexion CRM/banque. ZERO-HALLUCINATION : chaque chiffre est sourcee. Sources démo inventees mais coherentes, en production = sources réelles (BCE, AMF, Bloomberg).",
   } : {
     back: "Back", title: "Demo", sub: PRODUCT + " - zero-hallucination wealth agent",
     desc: "Paste your portfolio composition (lines: equities, bonds, real estate, savings, crypto). The AI agent produces a risk/return analysis with cited sources for EVERY claim. No real execution - POC showing production rigor.",
@@ -106,17 +106,17 @@ export default function DemoPage() {
       <style>{`
         *, *::before, *::after { box-sizing: border-box; }
         body { margin: 0; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
-        .wk-input { width: 100%; padding: 12px 14px; border-radius: 10px; background: ${PAL.surface}; border: 1px solid ${PAL.border}; color: ${PAL.txt1}; font-family: inherit; font-size: 14px; transition: border-color .2s, background .2s; }
+        .wk-input { width: 100%; padding: 12px 14px; border-radius: 6px; background: ${PAL.surface}; border: 1px solid ${PAL.border}; color: ${PAL.txt1}; font-family: inherit; font-size: 14px; transition: border-color .2s, background .2s; }
         .wk-input:focus { outline: none; border-color: ${PAL.accent}; background: ${PAL.surfaceHover}; }
-        .wk-btn-primary { background: ${PAL.accent}; color: #0D0F14; border: none; border-radius: 10px; padding: 13px 22px; font-weight: 700; font-size: 14px; cursor: pointer; font-family: inherit; transition: opacity .2s, transform .2s; display: inline-flex; align-items: center; gap: 8px; }
+        .wk-btn-primary { background: ${PAL.accent}; color: #0D0F14; border: none; border-radius: 6px; padding: 13px 22px; font-weight: 700; font-size: 14px; cursor: pointer; font-family: inherit; transition: opacity .2s, transform .2s; display: inline-flex; align-items: center; gap: 8px; }
         .wk-btn-primary:hover { opacity: .9; transform: translateY(-1px); }
         .wk-btn-primary:disabled { opacity: .5; cursor: not-allowed; transform: none; }
-        .wk-btn-ghost { background: ${PAL.surface}; color: ${PAL.txt1}; border: 1px solid ${PAL.border}; border-radius: 10px; padding: 9px 14px; font-weight: 600; font-size: 13px; cursor: pointer; font-family: inherit; transition: background .2s, border-color .2s; display: inline-flex; align-items: center; gap: 6px; }
+        .wk-btn-ghost { background: ${PAL.surface}; color: ${PAL.txt1}; border: 1px solid ${PAL.border}; border-radius: 6px; padding: 9px 14px; font-weight: 600; font-size: 13px; cursor: pointer; font-family: inherit; transition: background .2s, border-color .2s; display: inline-flex; align-items: center; gap: 6px; }
         .wk-btn-ghost:hover { background: ${PAL.surfaceHover}; border-color: ${PAL.accentBorder}; }
         .wk-md p, .wk-md ul { margin: 0 0 10px; }
         .wk-md ul { padding-left: 18px; }
         .wk-md li { margin-bottom: 4px; line-height: 1.65; }
-        .wk-md strong { color: ${PAL.accent}; font-weight: 700; display: block; margin-top: 10px; margin-bottom: 4px; font-size: 0.78rem; letter-spacing: 1.5px; text-transform: uppercase; }
+        .wk-md strong { color: ${PAL.accent}; font-weight: 700; display: block; margin-top: 10px; margin-bottom: 4px; font-size: 0.95rem;   }
         @media (max-width: 768px) { .demo-grid { grid-template-columns: 1fr !important; } }
       `}</style>
 
@@ -131,15 +131,15 @@ export default function DemoPage() {
       </nav>
 
       <main style={{ flex: 1, padding: "32px", maxWidth: 1200, margin: "0 auto", width: "100%" }}>
-        <h1 style={{ fontFamily: "'Instrument Serif',Georgia,serif", fontSize: "clamp(1.8rem,3.5vw,2.6rem)", fontWeight: 700, margin: "0 0 6px" }}>
-          {t.title} - <em style={{ fontStyle: "italic", color: PAL.accent }}>{PRODUCT}</em>
+        <h1 style={{ fontFamily: "var(--font-display), 'Bricolage Grotesque', sans-serif", letterSpacing: "-0.02em", fontSize: "clamp(1.8rem,3.5vw,2.6rem)", fontWeight: 700, margin: "0 0 6px" }}>
+          {t.title} - <em style={{ fontStyle: "normal", color: PAL.accent }}>{PRODUCT}</em>
         </h1>
         <p style={{ color: PAL.txt2, fontSize: "0.95rem", lineHeight: 1.65, maxWidth: 720, margin: "0 0 6px" }}>{t.sub}</p>
         <p style={{ color: PAL.txt3, fontSize: "0.78rem", lineHeight: 1.55, maxWidth: 720, margin: "0 0 28px" }}>{t.desc}</p>
 
         <div className="demo-grid" style={{ display: "grid", gridTemplateColumns: "360px 1fr", gap: 24 }}>
-          <section style={{ background: PAL.surface, border: `1px solid ${PAL.border}`, borderRadius: 16, padding: 22 }}>
-            <h2 style={{ fontSize: "0.72rem", color: PAL.txt3, textTransform: "uppercase", letterSpacing: 2, fontWeight: 700, margin: "0 0 14px" }}>{t.inputLabel}</h2>
+          <section style={{ background: PAL.surface, border: `1px solid ${PAL.border}`, borderRadius: 6, padding: 22 }}>
+            <h2 style={{ fontSize: "0.92rem", color: PAL.txt2, fontWeight: 700, margin: "0 0 14px" }}>{t.inputLabel}</h2>
             <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 18 }}>
               <textarea className="wk-input" value={portfolio} onChange={(e) => setPortfolio(e.target.value)} placeholder={t.placeholderP} rows={9} style={{ resize: "vertical", fontFamily: "monospace", fontSize: 12 }} />
               <button className="wk-btn-ghost" onClick={loadSample} style={{ justifyContent: "center" }}>{t.sample}</button>
@@ -151,9 +151,9 @@ export default function DemoPage() {
             <p style={{ color: PAL.txt3, fontSize: 11, lineHeight: 1.5, marginTop: 18, marginBottom: 0, paddingTop: 14, borderTop: `1px solid ${PAL.border}` }}>{t.note}</p>
           </section>
 
-          <section style={{ background: PAL.bg2, border: `1px solid ${PAL.border}`, borderRadius: 16, padding: 22, minHeight: 420, display: "flex", flexDirection: "column" }}>
+          <section style={{ background: PAL.bg2, border: `1px solid ${PAL.border}`, borderRadius: 6, padding: 22, minHeight: 420, display: "flex", flexDirection: "column" }}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
-              <h2 style={{ fontSize: "0.72rem", color: PAL.txt3, textTransform: "uppercase", letterSpacing: 2, fontWeight: 700, margin: 0, display: "flex", alignItems: "center", gap: 8 }}>
+              <h2 style={{ fontSize: "0.92rem", color: PAL.txt2, fontWeight: 700, margin: 0, display: "flex", alignItems: "center", gap: 8 }}>
                 <span style={{ width: 8, height: 8, borderRadius: "50%", background: output ? "#22C55E" : PAL.txt3 }} />
                 {t.outputTitle}
               </h2>
@@ -181,7 +181,7 @@ export default function DemoPage() {
       </main>
 
       {toast && (
-        <div style={{ position: "fixed", bottom: 24, left: "50%", transform: "translateX(-50%)", background: PAL.surface, border: `1px solid ${PAL.accentBorder}`, borderRadius: 12, padding: "12px 20px", color: PAL.txt1, fontSize: 13, fontWeight: 600, zIndex: 50, backdropFilter: "blur(20px)", boxShadow: "0 8px 28px rgba(0,0,0,0.4)" }}>
+        <div style={{ position: "fixed", bottom: 24, left: "50%", transform: "translateX(-50%)", background: PAL.surface, border: `1px solid ${PAL.accentBorder}`, borderRadius: 8, padding: "12px 20px", color: PAL.txt1, fontSize: 13, fontWeight: 600, zIndex: 50, backdropFilter: "blur(20px)", boxShadow: "0 8px 28px rgba(0,0,0,0.4)" }}>
           {"v "}{toast}
         </div>
       )}
