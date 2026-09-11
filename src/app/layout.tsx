@@ -4,7 +4,7 @@ import Script from "next/script";
 import "./globals.css";
 const display = Bricolage_Grotesque({ subsets: ["latin"], variable: "--font-display", display: "swap", weight: ["600", "700"] });
 const body = Instrument_Sans({ subsets: ["latin"], variable: "--font-body", display: "swap", weight: ["400", "500", "600", "700"] });
-export const metadata: Metadata = { title: "PatrimIA, Agent IA gestion de patrimoine, zero hallucination", description: "Quatre agents IA analysent votre portefeuille, confrontent les sources et generent un planning d'ordres justifie. Transparence totale sur chaque decision." };
+export const metadata: Metadata = { title: "PatrimIA, Agent IA gestion de patrimoine, zero hallucination", description: "Quatre agents IA analysent votre portefeuille, confrontent les sources et generent un planning d'ordres justifie. Transparence totale sur chaque décision." };
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="fr" className={`${display.variable} ${body.variable}`}>

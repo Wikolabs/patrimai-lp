@@ -34,7 +34,7 @@ export default function DemoPage() {
 
   const t = lang === "fr" ? {
     back: "Retour", title: "Démo", sub: PRODUCT + " - agent patrimonial zero-hallucination",
-    desc: "Collez la composition de votre portefeuille (lignes : actions, obligations, immobilier, livrets, crypto). L'agent IA produit une analyse risque/rendement avec sources citees pour CHAQUE affirmation. Aucune execution réelle - POC qui montre la rigueur de production.",
+    desc: "Collez la composition de votre portefeuille (lignes : actions, obligations, immobilier, livrets, crypto). L'agent IA produit une analyse risque/rendement avec sources citées pour CHAQUE affirmation. Aucune exécution réelle - POC qui montre la rigueur de production.",
     inputLabel: "Composition portefeuille",
     placeholderP: "Une ligne par poste (ex: Actions tech, 120 000 EUR)",
     sample: "Utiliser un exemple",
@@ -42,11 +42,11 @@ export default function DemoPage() {
     outputTitle: "Analyse PatrimIA", emptyHint: "L'analyse s'affiche ici une fois générée.",
     contactCGP: "Briefer mon CGP", exportPDF: "Exporter en PDF", verifySources: "Vérifier les sources",
     cgpMock: "Brief envoyé à votre CGP (mode démo, pas de connexion CRM réelle)",
-    pdfMock: "PDF réglementaire généré (mode démo, pas de telechargement réel)",
-    sourcesMock: "Sources verifiees - lien vers AMF, BCE, Morningstar (mode démo)",
+    pdfMock: "PDF réglementaire généré (mode démo, pas de téléchargement réel)",
+    sourcesMock: "Sources vérifiées - lien vers AMF, BCE, Morningstar (mode démo)",
     fallback: "Mode statique : la clé LLM sera ajoutée au prochain déploiement.",
     poweredBy: "Modèle :",
-    note: "DEMO POC - aucune execution d'ordre, aucune connexion CRM/banque. ZERO-HALLUCINATION : chaque chiffre est sourcee. Sources démo inventees mais coherentes, en production = sources réelles (BCE, AMF, Bloomberg).",
+    note: "DEMO POC - aucune exécution d'ordre, aucune connexion CRM/banque. ZERO-HALLUCINATION : chaque chiffre est sourcée. Sources démo inventées mais coherentes, en production = sources réelles (BCE, AMF, Bloomberg).",
   } : {
     back: "Back", title: "Demo", sub: PRODUCT + " - zero-hallucination wealth agent",
     desc: "Paste your portfolio composition (lines: equities, bonds, real estate, savings, crypto). The AI agent produces a risk/return analysis with cited sources for EVERY claim. No real execution - POC showing production rigor.",
